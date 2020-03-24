@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "6ccf38be-226b-4d01-bcbd-2b8e0ed56b5e",
+		"name": "IHRMTEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST请求--登录成功",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c9f14c3-31dd-4a03-a1fc-4021ca2b22e6",
+						"exec": [
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"操作成功！\");",
+							"});",
+							"",
+							"pm.test(\"code is 10000\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.code).to.eql(10000);",
+							"});",
+							"",
+							"pm.test(\"success is true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.success).to.eql(true);",
+							"});",
+							"",
+							"var token = pm.response.json().data;",
+							"pm.environment.set(\"token\",\"Bearer \"+ token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"name": "Content-Type",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mobile\":\"13800000002\", \r\n\"password\":\"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://182.92.81.159/api/sys/login",
+					"protocol": "http",
+					"host": [
+						"182",
+						"92",
+						"81",
+						"159"
+					],
+					"path": [
+						"api",
+						"sys",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
